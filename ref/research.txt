@@ -1,0 +1,99 @@
+vscode lsp - Google Search
+https://www.google.com/search?q=vscode+lsp&client=safari&sca_esv=d4df4a45296c77b3&rls=en&biw=1496&bih=853&sxsrf=ADLYWIJ_gy8DmpeGFI_bqgjj-XciaIH0JQ%3A1725249437796&ei=nTfVZuWsMKXWseMP8ZjhqAc&ved=0ahUKEwil743_rqOIAxUla2wGHXFMGHUQ4dUDCBA&uact=5&oq=vscode+lsp&gs_lp=Egxnd3Mtd2l6LXNlcnAiCnZzY29kZSBsc3AyCxAAGIAEGJECGIoFMgYQABgHGB4yBhAAGAcYHjIGEAAYBxgeMgYQABgHGB4yBhAAGAcYHjIGEAAYBxgeMgYQABgHGB4yBhAAGAcYHjIGEAAYBxgeSMAVUOsDWKkTcAJ4AZABAJgB0wGgAfAJqgEFMC43LjG4AQPIAQD4AQGYAgagAvIEwgIKEAAYsAMY1gQYR8ICDhAAGIAEGJECGLEDGIoFwgILEAAYgAQYsQMYgwHCAgoQLhiABBhDGIoFwgIFEAAYgATCAgcQABiABBgNmAMAiAYBkAYIkgcDMi40oAe7LA&sclient=gws-wiz-serp
+
+Overview
+https://microsoft.github.io/language-server-protocol/overviews/lsif/overview/
+
+vscode-languageserver - npm
+https://www.npmjs.com/package/vscode-languageserver
+
+vscode-languageclient - npm
+https://www.npmjs.com/package/vscode-languageclient
+
+microsoft/lsif-node: Define an index format for Language Servers
+https://github.com/Microsoft/lsif-node
+
+microsoft/vscode-lsif-extension: Extension for a LSIF Server
+https://github.com/Microsoft/vscode-lsif-extension
+
+volarjs/volar.js: 💙🌊
+https://github.com/volarjs/volar.js
+
+eclipse-langium/langium: Next-gen language engineering / DSL framework
+https://github.com/eclipse-langium/langium
+
+microsoft/vscode-languageserver-node: Language server protocol implementation for VSCode. This allows implementing language services in JS/TS running on node.js
+https://github.com/microsoft/vscode-languageserver-node
+
+lasponya - npm
+https://www.npmjs.com/package/lasponya
+
+LSP Devtools
+https://lsp-devtools.readthedocs.io/en/latest/
+
+Getting Started - LSP Devtools
+https://lsp-devtools.readthedocs.io/en/latest/lsp-devtools/guide/getting-started.html
+
+monaco-languageserver-types - npm
+https://www.npmjs.com/package/monaco-languageserver-types
+
+TypeFox/monaco-languageclient: Repo hosts npm packages for monaco-languageclient, vscode-ws-jsonrpc, monaco-editor-wrapper, @typefox/monaco-editor-react and monaco-languageclient-examples
+https://github.com/TypeFox/monaco-languageclient?tab=readme-ov-file
+
+Tamim468/Monaco-LSP: Featuring a monaco editor with language client which connects the editor to luau language server from johnnymorganz!
+https://github.com/Tamim468/Monaco-LSP
+
+arnoson/monaco-lua-example: An example setup using sumneko's Lua Language Server and JohnnyMorganz's StyLua together with Monaco Editor.
+https://github.com/arnoson/monaco-lua-example
+
+monaco-languageclient - npm
+https://www.npmjs.com/package/monaco-languageclient
+
+Language Server Protocol (Adding Support for Multiple Language Servers to Monaco Editor) | by Rahulkumarsindhav | DSC DDU | Medium
+https://medium.com/dscddu/language-server-protocol-adding-support-for-multiple-language-servers-to-monaco-editor-a3c35e42a98d
+
+[Part 2] Connect Monaco React Web Editor with Language Server using WebSocket… How hard can it be? | by Nipuna Marcus | Medium
+https://nipunamarcus.medium.com/part-2-connect-monaco-react-web-editor-with-language-server-using-websocket-how-hard-can-it-be-aa66d93327a6
+
+web-editor/src/components/ls-client/ws-client.ts at websocket-ls · NipunaMarcus/web-editor
+https://github.com/NipunaMarcus/web-editor/blob/websocket-ls/src/components/ls-client/ws-client.ts
+
+I've recently started adding support for the Language Server Protocol (LSP) in a... | Hacker News
+https://news.ycombinator.com/item?id=18461834
+
+Teaching the Language Server Protocol to Microsoft's Monaco Editor | TypeFox
+https://www.typefox.io/blog/teaching-the-language-server-protocol-to-microsofts-monaco-editor/
+
+visual studio code - Creating LSP (Language Server Protocol) for multiple clients using RPC - Stack Overflow
+https://stackoverflow.com/questions/64000616/creating-lsp-language-server-protocol-for-multiple-clients-using-rpc
+
+Langium + Monaco Editor | Langium
+https://langium.org/docs/learn/minilogo/langium_and_monaco/
+
+lsp-monaco-editor - npm
+https://www.npmjs.com/package/lsp-monaco-editor
+
+How to embed a Monaco Editor in a browser as a part of my first task at TypeFox | TypeFox
+https://www.typefox.io/blog/how-to-embed-a-monaco-editor-in-a-browser-as-a-part-of-my-first-task-at-typefox/
+
+Integrating TextX and Monaco – A Non-Tutorial - Strumenta
+https://tomassetti.me/integrating-textx-and-monaco-a-non-tutorial/
+
+One of the things I was hoping to see in this release was first-class LSP (langu... | Hacker News
+https://news.ycombinator.com/item?id=26039820
+
+monaco-editor 周りの調査
+https://zenn.dev/mizchi/scraps/87c2c5a37cbd6a
+
+Developer Diaries: How We Built a Better Browser-Based IDE with Monaco - CoderPad
+https://coderpad.io/blog/development/developer-diaries-how-we-built-coderpad-monaco-ide/
+
+wylieconlon/jsonrpc-ws-proxy: Create a web socket interface for any number of language servers running in subprocesses
+https://github.com/wylieconlon/jsonrpc-ws-proxy/tree/master
+
+TypeFox/monaco-languageclient: Repo hosts npm packages for monaco-languageclient, vscode-ws-jsonrpc, monaco-editor-wrapper, @typefox/monaco-editor-react and monaco-languageclient-examples
+https://github.com/TypeFox/monaco-languageclient/tree/main
+
+TypeCellOS/BlockNote: A React Rich Text Editor that's block-based (Notion style) and extensible. Built on top of Prosemirror and Tiptap.
+https://github.com/TypeCellOS/BlockNote?tab=readme-ov-file
+
