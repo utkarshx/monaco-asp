@@ -1,16 +1,25 @@
-import { Editor } from '@monaco-editor/react'
+import { Editor, Monaco } from '@monaco-editor/react'
 import './App.css'
 import { createModel, registerLanguage } from './ws/utils';
 import { connectToLs } from './ws/wsclient';
 
 function App() {
   const editorDidMount= (editor,monaco) => {
-    registerLanguage();
-    const model = createModel();
-    editor.setModel(model);
-    connectToLs();
-    editor.focus();
-};
+      const model = createModel(monaco);
+      editor.setModel(model);
+      connectToLs();
+      editor.focus();
+  };
+
+  const beforeMount = (monaco: Monaco) => {
+    monaco.languages.register({
+      id: 'lua',
+      extensions: ['.lua'],
+      aliases: ['Lua', 'lua'],
+    });
+  }
+
+
   return (
     <>
       <Editor
@@ -18,6 +27,7 @@ function App() {
         defaultLanguage="lua"
         defaultValue="// some comment"
         onMount={editorDidMount}
+        beforeMount={(monaco: Monaco) => beforeMount(monaco)}
       />
       ;
     </>

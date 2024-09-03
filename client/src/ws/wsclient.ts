@@ -11,7 +11,6 @@ export  function connectToLs() {
         const webSocket = new WebSocket(LS_WS_URL);
 
         webSocket.onopen = () => {
-            console.log('LS WebSocket connection Opennnnnnnnnnnn');
             const socket = toSocket(webSocket);
             const reader = new WebSocketMessageReader(socket);
             const writer = new WebSocketMessageWriter(socket);
@@ -29,8 +28,12 @@ export  function connectToLs() {
                 },
             });
 
-            languageClient.start();
-            resolve(true);
+            languageClient.start()
+                .then(() => console.log('language client started'))
+                .finally(() => console.log('language client done'));
+
+            reader.onClose(() => languageClient.stop());
+            resolve(languageClient);
         }
 
         webSocket.onerror = (error) => {
