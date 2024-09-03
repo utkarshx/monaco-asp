@@ -1,0 +1,2 @@
+Issue where example given below is mentioned :  https://github.com/suren-atoyan/monaco-react/issues/405
+here is the example repo implementing lsp : https://github.com/wudstrand/lsp-ingration-react-monaco-editor
