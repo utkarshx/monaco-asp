@@ -1,6 +1,6 @@
 import { Editor, Monaco } from '@monaco-editor/react'
 import './App.css'
-import { createModel, registerLanguage } from './ws/utils';
+import { createModel } from './ws/utils';
 import { connectToLs } from './ws/wsclient';
 
 function App() {
