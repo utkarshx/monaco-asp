@@ -1,25 +1,27 @@
 {
-    "name": "web-editor",
-    "version": "0.0.1",
-    "license": "MIT",
-    "scripts": {
-        "build": "tsc & vite build",
-        "dev": "vite"
-    },
-    "devDependencies": {
-        "@types/react": "^18.2.43",
-        "@types/react-dom": "^18.2.17",
-        "@vitejs/plugin-react": "^4.3.0",
-        "typescript": "^5.4.5",
-        "vite": "^5.2.11"
-    },
-    "dependencies": {
-        "monaco-editor": "0.36.1",
-        "monaco-languageclient": "5.0.1",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-monaco-editor": "^0.52.0",
-        "vscode-ws-jsonrpc":"^3.3.1",
-        "vscode-languageclient": "8.0.2"
-    }
+  "name": "web-editor",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc & vite build",
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.3.0",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11"
+  },
+  "dependencies": {
+    "@codingame/monaco-vscode-textmate-service-override": "^8.0.4",
+    "@codingame/monaco-vscode-theme-service-override": "^8.0.4",
+    "monaco-editor": "^0.50.0",
+    "monaco-languageclient": "^8.8.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-monaco-editor": "^0.56.1",
+    "vscode-languageclient": "8.0.2",
+    "vscode-ws-jsonrpc": "^3.3.1"
+  }
 }

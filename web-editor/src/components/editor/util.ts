@@ -1,7 +1,20 @@
 import * as monaco from 'monaco-editor';
 import { HELLO_LANG_EXTENSION, HELLO_LANG_ID } from "./constants"
-
-export const registerLanguage = () => {
+import { initServices } from 'monaco-languageclient/vscode/services';
+// monaco-editor does not supply json highlighting with the json worker,
+// that's why we use the textmate extension from VSCode
+import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-override';
+import getTextmateServiceOverride from '@codingame/monaco-vscode-textmate-service-override';
+export const registerLanguage =async () => {
+    await initServices({
+        serviceConfig: {
+            userServices: {
+                ...getThemeServiceOverride(),
+                ...getTextmateServiceOverride(),
+            },
+            debugLogging: true,
+        }
+    });
     monaco.languages.register({
         id: HELLO_LANG_ID,
         aliases: [HELLO_LANG_ID],

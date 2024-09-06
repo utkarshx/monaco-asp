@@ -8,7 +8,7 @@ export function Editor() {
         registerLanguage();
         const model = createModel();
         editor.setModel(model);
-        connectToLs();
+         connectToLs();
         editor.focus();
     };
 
