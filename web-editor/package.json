@@ -14,12 +14,14 @@
         "vite": "^5.4.3"
     },
     "dependencies": {
+        "@codingame/monaco-vscode-textmate-service-override": "^8.0.4",
+        "@codingame/monaco-vscode-theme-service-override": "^8.0.4",
         "monaco-editor": "^0.50.0",
         "monaco-languageclient": "8.8.3",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-monaco-editor": "^0.56.1",
-        "vscode-ws-jsonrpc":"^3.3.2",
-        "vscode-languageclient": "9.0.1"
+        "vscode-languageclient": "9.0.1",
+        "vscode-ws-jsonrpc": "^3.3.2"
     }
 }
