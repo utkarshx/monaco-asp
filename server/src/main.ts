@@ -1,12 +1,12 @@
 import { WebSocketServer } from 'ws'
-import * as rpc from 'vscode-ws-jsonrpc'
+import { IWebSocket } from 'vscode-ws-jsonrpc'
 import { launch } from './launch'
 
 // If you change the port, make sure to also change it for the client!
 const port = 8080
 
 new WebSocketServer({ port }).on('connection', (webSocket) => {
-    const socket: rpc.IWebSocket = {
+    const socket: IWebSocket = {
         send: (content) =>
             webSocket.send(content, (error) => {
                 if (error) throw error
