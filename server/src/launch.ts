@@ -9,11 +9,11 @@ export const launch = (socket: IWebSocket) => {
 
     const socketConnection = createConnection(reader, writer, () => socket.dispose())
 
-    const serverModule = path.join(__dirname, '..',  'node_modules', 'typescript-language-server', 'lib', 'cli.mjs')
+    const serverModule = path.join(__dirname, '..', 'node_modules', 'sql-language-server', 'dist', 'bin', 'cli.js')
     const serverConnection = createServerProcess(
-        'TypeScript',
+        'SQL',
         'node',
-        [serverModule, '--stdio']
+        [serverModule, 'up', '--method', 'stdio']
     )
 
     if (serverConnection) {

@@ -1,7 +1,7 @@
 import * as monaco from 'monaco-editor';
 
-export const HELLO_LANG_ID = "typescript";
-export const HELLO_LANG_EXTENSION = ".ts";
+export const HELLO_LANG_ID = "SQL";
+export const HELLO_LANG_EXTENSION = ".sql";
 export const MONACO_OPTIONS: monaco.editor.IEditorConstructionOptions = {
     autoIndent: "full",
     automaticLayout: true,
