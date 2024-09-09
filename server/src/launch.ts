@@ -1,6 +1,7 @@
 import { IWebSocket, WebSocketMessageReader, WebSocketMessageWriter } from 'vscode-ws-jsonrpc'
 import { createConnection, createServerProcess } from 'vscode-ws-jsonrpc/server'
 import { InitializeRequest, Message, InitializeParams } from 'vscode-languageserver'
+import * as path from 'path'
 
 export const launch = (socket: IWebSocket) => {
     const reader = new WebSocketMessageReader(socket)
@@ -8,10 +9,11 @@ export const launch = (socket: IWebSocket) => {
 
     const socketConnection = createConnection(reader, writer, () => socket.dispose())
 
+    const serverModule = path.join(__dirname, '..',  'node_modules', 'typescript-language-server', 'lib', 'cli.mjs')
     const serverConnection = createServerProcess(
         'TypeScript',
-        'typescript-language-server',
-        ['--stdio']
+        'node',
+        [serverModule, '--stdio']
     )
 
     if (serverConnection) {
