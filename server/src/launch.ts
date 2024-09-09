@@ -23,7 +23,9 @@ export const launch = (socket: IWebSocket) => {
             // }
             // return message
             if (Message.isRequest(message)) {
+                console.log("Request: --------------------------------")
                 console.log(message)
+                console.log("Request End: --------------------------------")
                 if (message.method === InitializeRequest.type.method) {
                     const initializeParams = message.params as InitializeParams;
                     initializeParams.processId = process.pid;
@@ -31,7 +33,9 @@ export const launch = (socket: IWebSocket) => {
                 }
             }
             if (Message.isResponse(message)) {
+                console.log("Response: ------------------------------")
                 console.log(message);
+                console.log("Response End: ------------------------------")
             }
             return message;
         })
