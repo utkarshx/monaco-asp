@@ -14,9 +14,9 @@ export function connectToLs() {
             const reader = new WebSocketMessageReader(socket);
             const writer = new WebSocketMessageWriter(socket);
             const languageClient = new MonacoLanguageClient({
-                name: `${HELLO_LANG_ID} Language Client`,
+                name: 'TypeScript Language Client',
                 clientOptions: {
-                    documentSelector: [HELLO_LANG_ID],
+                    documentSelector: ['typescript'],
                     errorHandler: {
                         error: () => ({ action: ErrorAction.Continue }),
                         closed: () => ({ action: CloseAction.DoNotRestart })
