@@ -1,0 +1,29 @@
+{
+  "name": "monaco-lua-example-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon -r esbuild-register src/main.ts",
+    "build": "esbuild src/main.ts --bundle --platform=node --outdir=dist",
+    "start": "node dist/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/ws": "^8.5.12",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4",
+    "sql-language-server": "^1.7.0",
+    "typescript-language-server": "^4.3.3",
+    "vscode-languageserver": "^9.0.1",
+    "vscode-ws-jsonrpc": "^3.3.2",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.4",
+    "esbuild-register": "^3.6.0",
+    "ts-node": "^10.9.2"
+  }
+}
