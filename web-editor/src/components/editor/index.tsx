@@ -1,10 +1,10 @@
 import MonacoEditor, { EditorDidMount } from "react-monaco-editor";
 import { connectToLs } from "../ls-client/ws-client";
-import { MONACO_OPTIONS } from "./constants";
-import { configureMonacoWorkers, createModel, registerLanguage } from "./util";
+import { HELLO_LANG_ID, MONACO_OPTIONS } from "./constants";
+import { createModel, registerLanguage } from "./util";
+import { languages, editor } from "monaco-editor/esm/vs/editor/editor.api"
 export function Editor() {
     const editorDidMount: EditorDidMount = (editor) => {
-        configureMonacoWorkers();
         registerLanguage();
         const model = createModel();
         editor.setModel(model);
@@ -21,8 +21,7 @@ export function Editor() {
                 <MonacoEditor
                     width="100%"
                     height="80vh"
-                    // language="lua"
-                    language="typescript"
+                    language="lua"
                     theme="vs"
                     options={MONACO_OPTIONS}
                     editorDidMount={editorDidMount}

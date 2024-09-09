@@ -15,15 +15,10 @@ export const registerLanguage = async() => {
             debugLogging: true,
         }
     });
-    // monaco.languages.register({
-    //     id: HELLO_LANG_ID,
-    //     aliases: [HELLO_LANG_ID],
-    //     extensions: [HELLO_LANG_EXTENSION]
-    // });
     monaco.languages.register({
-        id: 'typescript',
-        extensions: ['.ts', '.tsx'],
-        aliases: ['TypeScript', 'ts', 'typescript']
+        id: HELLO_LANG_ID,
+        aliases: [HELLO_LANG_ID],
+        extensions: [HELLO_LANG_EXTENSION]
     });
 }
 
@@ -34,14 +29,3 @@ export const createModel = (): monaco.editor.ITextModel => monaco.editor.createM
         `file:///hello-${Math.random()}${HELLO_LANG_EXTENSION}`
     )
 );
-
-export const configureMonacoWorkers = () => {
-    (self as any).MonacoEnvironment = {
-        getWorkerUrl: function (_moduleId: any, label: string) {
-            if (label === 'typescript' || label === 'javascript') {
-                return './ts.worker.bundle.js';
-            }
-            return './editor.worker.bundle.js';
-        }
-    };
-};

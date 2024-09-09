@@ -1,7 +1,7 @@
 import * as monaco from 'monaco-editor';
 
-export const HELLO_LANG_ID = "lua";
-export const HELLO_LANG_EXTENSION = ".lua";
+export const HELLO_LANG_ID = "typescript";
+export const HELLO_LANG_EXTENSION = ".ts";
 export const MONACO_OPTIONS: monaco.editor.IEditorConstructionOptions = {
     autoIndent: "full",
     automaticLayout: true,
