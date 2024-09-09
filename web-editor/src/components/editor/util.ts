@@ -34,3 +34,14 @@ export const createModel = (): monaco.editor.ITextModel => monaco.editor.createM
         `file:///hello-${Math.random()}${HELLO_LANG_EXTENSION}`
     )
 );
+
+export const configureMonacoWorkers = () => {
+    (self as any).MonacoEnvironment = {
+        getWorkerUrl: function (_moduleId: any, label: string) {
+            if (label === 'typescript' || label === 'javascript') {
+                return './ts.worker.bundle.js';
+            }
+            return './editor.worker.bundle.js';
+        }
+    };
+};

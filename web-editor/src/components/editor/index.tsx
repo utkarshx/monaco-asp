@@ -1,9 +1,10 @@
 import MonacoEditor, { EditorDidMount } from "react-monaco-editor";
 import { connectToLs } from "../ls-client/ws-client";
 import { MONACO_OPTIONS } from "./constants";
-import { createModel, registerLanguage } from "./util";
+import { configureMonacoWorkers, createModel, registerLanguage } from "./util";
 export function Editor() {
     const editorDidMount: EditorDidMount = (editor) => {
+        configureMonacoWorkers();
         registerLanguage();
         const model = createModel();
         editor.setModel(model);
