@@ -2,15 +2,20 @@ import MonacoEditor, { EditorDidMount } from "react-monaco-editor";
 import { connectToLs } from "../ls-client/ws-client";
 import { HELLO_LANG_ID, MONACO_OPTIONS } from "./constants";
 import { createModel, registerLanguage } from "./util";
-import { languages, editor } from "monaco-editor/esm/vs/editor/editor.api"
+// import { languages, editor } from "monaco-editor/esm/vs/editor/editor.api"
+// import * as monaco from 'monaco-editor';
+
 export function Editor() {
-    const editorDidMount: EditorDidMount = async (editor) => {
+    const editorDidMount: EditorDidMount = async (editor, monaco) => {
         await registerLanguage();
         const model = createModel();
         editor.setModel(model);
         await connectToLs();
         editor.focus();
     };
+    // const onChange = (newValue: any, e: any) => {
+    //     console.log('onChange', newValue, e);
+    //   }
 
     return (
         <div>
