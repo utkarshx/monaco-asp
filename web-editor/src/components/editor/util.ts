@@ -2,21 +2,32 @@ import * as monaco from 'monaco-editor';
 import { HELLO_LANG_EXTENSION, HELLO_LANG_ID } from "./constants"
 import { initServices } from 'monaco-languageclient/vscode/services';
 
+let isServicesInitialized = false;
 
-export const registerLanguage = async() => {
-    await initServices({
-        serviceConfig: {
-            userServices: {
-
-            },
-            debugLogging: true,
+export const registerLanguage = async () => {
+    if (!isServicesInitialized) {
+        try {
+            await initServices({
+                serviceConfig: {
+                    userServices: {},
+                    debugLogging: true,
+                }
+            });
+            isServicesInitialized = true;
+        } catch (error) {
+            console.warn('Services initialization failed:', error);
+            // Proceed even if initialization fails
         }
-    });
-    monaco.languages.register({
-        id: HELLO_LANG_ID,
-        aliases: [HELLO_LANG_ID],
-        extensions: [HELLO_LANG_EXTENSION]
-    });
+    }
+
+    // Avoid duplicate language registration
+    if (!monaco.languages.getLanguages().some(lang => lang.id === HELLO_LANG_ID)) {
+        monaco.languages.register({
+            id: HELLO_LANG_ID,
+            aliases: [HELLO_LANG_ID],
+            extensions: [HELLO_LANG_EXTENSION]
+        });
+    }
 }
 
 export const createModel = (): monaco.editor.ITextModel => monaco.editor.createModel(

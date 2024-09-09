@@ -5,14 +5,16 @@ const APP_DIR = path.resolve(__dirname, './src');
 const MONACO_DIR = path.resolve(__dirname, './node_modules/monaco-editor');
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: path.resolve(__dirname, 'src', 'index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
+  devtool: 'inline-source-map',  // Add source maps for debugging
   module: {
     rules: [
       {
@@ -44,7 +46,6 @@ module.exports = {
       template: './index.html',
     }),
     new MonacoWebpackPlugin({
-      // available options are documented at https://github.com/microsoft/monaco-editor/blob/main/webpack-plugin/README.md#options
       languages: ['json', 'typescript']
     })
   ],
@@ -53,5 +54,7 @@ module.exports = {
       directory: path.join(__dirname, 'public'),
     },
     port: 3000,
+    historyApiFallback: true,
+    hot: true,
   },
 };
