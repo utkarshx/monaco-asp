@@ -1,5 +1,5 @@
 import { IWebSocket, WebSocketMessageReader, WebSocketMessageWriter } from 'vscode-ws-jsonrpc'
-import { createConnection, createServerProcess } from 'vscode-ws-jsonrpc/server'
+import { forward, createConnection, createServerProcess } from 'vscode-ws-jsonrpc/server'
 import { InitializeRequest, Message, InitializeParams } from 'vscode-languageserver'
 import * as path from 'path'
 
@@ -17,13 +17,21 @@ export const launch = (socket: IWebSocket) => {
     )
 
     if (serverConnection) {
-        socketConnection.forward(serverConnection, (message: Message) => {
+        forward(socketConnection, serverConnection, (message) => {
+            // if (rpc.isRequestMessage(message) && isInitializeRequest(message)) {
+            //     message.params.processId = process.pid
+            // }
+            // return message
             if (Message.isRequest(message)) {
+                console.log(message)
                 if (message.method === InitializeRequest.type.method) {
                     const initializeParams = message.params as InitializeParams;
                     initializeParams.processId = process.pid;
-                    message.params = initializeParams;
+                    message.params = initializeParams; //Check
                 }
+            }
+            if (Message.isResponse(message)) {
+                console.log(message);
             }
             return message;
         })
