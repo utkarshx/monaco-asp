@@ -50,13 +50,13 @@ enum LanguageName {
 }
 
 const baseDir = path.resolve(dirname(fileURLToPath(import.meta.url)));
-const relativeDir = '../../../../../node_modules/pyright/dist/pyright-langserver.js';
+const relativeDir = './node_modules/pyright/dist/pyright-langserver.js';
 
 const processRunPath = path.resolve(baseDir, relativeDir);
-
+//   let name =__dirname
 var languageServerRunConfig = {
     serverName: 'PYRIGHT',
-    pathName: '/pyright',
+    pathName: `pyright`,
     serverPort: 30001,
     runCommand: LanguageName.node,
     runCommandArgs: [
@@ -97,8 +97,7 @@ const wss = new WebSocketServer(languageServerRunConfig.wsServerOptions);
 httpServer.on('upgrade', (request: IncomingMessage, socket: Socket, head: Buffer) => {
     const baseURL = `http://${request.headers.host}/`;
     console.log('WebSocket upgrade request received:', request.url);
-    const pathName = request.url !== undefined ? new URL(request.url, baseURL).pathname : undefined;
-
+    let  pathName = request.url !== undefined ? new URL(request.url, baseURL).pathname : request.url;
     if (pathName === languageServerRunConfig.pathName) {
         wss.handleUpgrade(request, socket, head, webSocket => {
             const socket: IWebSocket = {
