@@ -1,90 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>monaco-languageclient Examples</title>
-    <link rel="stylesheet" href="packages/examples/style.css">
+    <title>JSON Language Client & Language Server (Web Socket)</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div style="padding: 5px">
-        <h2>Examples</h2>
+    <h2>JSON Language Client & Language Server (Web Socket)</h2>
+    <button type="button" id="button-start">Start</button>
+    <button type="button" id="button-dispose">Dispose</button>
+    <div id="monaco-editor-root" style="height: 80vh;"></div>
+    <script type="module">
+        import { configureMonacoWorkers, runJsonWrapper } from './src/json/client/wrapperWs.ts';
 
-        Please run <b><code>npm run build</code></b> if you haven't done it already.
-
-        <h2>Monaco Languaclient</h2>
-
-        <h3>JSON</h3>
-
-        Please execute <b><code>npm run start:example:server:json</code></b> beforehand:<br>
-        <a href="./bare.html">JSON Language Client & Language Server (Web Socket)</a>
-        <br>
-
-        <h2>Monaco Editor Wrapper</h2>
-
-        <h3>JSON</h3>
-
-        Please execute <b><code>npm run start:example:server:json</code></b> beforehand:<br>
-        <a href="./wrapper_ws.html">JSON Language Client & Language Server (Web Socket)</a>
-        <br>
-        <a href="./browser.html">Language Client Pure Browser Example</a>
-        <br>
-
-        <h3>Langium</h3>
-
-        <a href="./wrapper_langium.html">Langium Grammar DSL Language Client & Language Server (Worker)</a>
-        <br>
-        <a href="./wrapper_statemachine.html">Langium Statemachine Client & Language Server (Worker)</a>
-        <br>
-        Localizations: <a href="./wrapper_statemachine.html?locale=de">German</a> <a href="./wrapper_statemachine.html?locale=fr">French</a> and <a href="./wrapper_statemachine.html?locale=es">Spanish</a><br>
-
-        <h3>Python</h3>
-        Please execute <b><code>npm run start:example:server:python</code></b> beforehand:<br>
-        <a href="./python.html">Python Language Client & Pyright Language Server (Web Socket)</a><br>
-
-        <h3>Java / Eclipse JDS LS</h3>
-        Requires docker. Please execute <b><code>docker compose -f ./resources/eclipse.jdt.ls/docker-compose.yml up -d</code></b> beforehand:<br>
-        <a href="./eclipse.jdt.ls.html">Java Language Client & Language Server (Web Socket)</a>
-        <br>
-
-        <h3>Groovy</h3>
-        Requires docker. Please execute <b><code>docker compose -f ./resources/groovy/docker-compose.yml up -d</code></b> beforehand:<br>
-        <a href="./groovy.html">Groovy Language Client & Language Server (Web Socket)</a>
-        <br>
-
-        <h2>Monaco Editor React</h2>
-        <a href="./react_statemachine.html">React: Langium Statemachine Language Client & Language Server (Worker)</a>
-        <br>
-        <br>
-        Please execute  <b><code>npm run start:example:server:python</code></b> beforehand:<br>
-        <a href="./react_python.html">React: Python Language Client & Language Server (Web Socket)</a>
-        <br>
-
-        <h3>monaco-editor related examples</h3>
-        <a href="./wrapper_ts.html">Monaco Editor Wrapper TypeScript Example</a>
-        <br>
-        <a href="./wrapper_adv.html">Multiple Editors</a>
-        <br>
-
-        <h2>Verification</h2>
-        <h3>Angular</h2>
-        Please start  <b><code>cd verify/angular && npm run verify</code></b> beforehand:<br>
-        <a href="http://localhost:4200">JSON Language Client & Language Server (Web Socket) (Angular)</a>
-        <h3>Webpack</h3>
-        Please start  <b><code>cd verify/webpack && npm run verify</code></b> beforehand:<br>
-        <a href="http://localhost:8081">JSON Language Client & Language Server (Web Socket) (webpack build)</a>
-        <h3>Vite</h3>
-        Please start  <b><code>cd verify/vite && npm run verify</code></b> beforehand:<br>
-        <a href="http://localhost:8082">JSON Language Client & Language Server (Web Socket) (vite build)</a>
-        <h3>Pnpm/vite</h3>
-        Please start  <b><code>cd verify/pnpm && pnpm run verify</code></b> beforehand:<br>
-        <a href="http://localhost:8083">JSON Language Client & Language Server (Web Socket) (pnpm/vite build)</a>
-        <h3>Yarn/vite</h3>
-        Please start  <b><code>cd verify/yarn && yarn run verify</code></b> beforehand:<br>
-        <a href="http://localhost:8083">JSON Language Client & Language Server (Web Socket) (yarn/vite build)</a>
-    </div>
+        configureMonacoWorkers();
+        runJsonWrapper();
+    </script>
 </body>
 
 </html>
