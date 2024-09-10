@@ -1,7 +1,22 @@
 import { WebSocketServer } from 'ws';
-import { Server } from 'node:http';
+import { IncomingMessage, Server } from 'node:http';
 import express from 'express';
+import type { Express } from 'express';
 
+import { URL } from 'node:url';
+import path from 'node:path';
+import { Socket } from 'node:net';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { IWebSocket, WebSocketMessageReader, WebSocketMessageWriter } from 'vscode-ws-jsonrpc';
+import { createConnection, createServerProcess, forward } from 'vscode-ws-jsonrpc/server';
+import { Message, InitializeRequest, InitializeParams } from 'vscode-languageserver';
+
+
+export const getLocalDirectory = (referenceUrl: string | URL) => {
+    const __filename = fileURLToPath(referenceUrl);
+    return dirname(__filename);
+};
 
 export const launchLanguageServer = (runconfig, socket: IWebSocket) => {
     const { serverName, runCommand, runCommandArgs, spawnOptions } = runconfig;
@@ -34,10 +49,10 @@ enum LanguageName {
     java = 'java'
 }
 
-const baseDir = resolve(dirname(fileURLToPath(import.meta.url)));
+const baseDir = path.resolve(dirname(fileURLToPath(import.meta.url)));
 const relativeDir = '../../../../../node_modules/pyright/dist/pyright-langserver.js';
 
-const processRunPath = resolve(baseDir, relativeDir);
+const processRunPath = path.resolve(baseDir, relativeDir);
 
 var languageServerRunConfig = {
     serverName: 'PYRIGHT',
@@ -67,19 +82,23 @@ var languageServerRunConfig = {
     }
 }
 
+
 // create the express application
-const app = express();
+const app:Express = express();
 // server the static content, i.e. index.html
 const dir = getLocalDirectory(import.meta.url);
 app.use(express.static(dir));
 // start the http server
-const httpServer: Server = app.listen(languageServerRunConfig.serverPort);
+const httpServer: Server = app.listen(languageServerRunConfig.serverPort, () => {
+    console.log(`Server started on port ${languageServerRunConfig.serverPort}`);
+});
 const wss = new WebSocketServer(languageServerRunConfig.wsServerOptions);
 
 httpServer.on('upgrade', (request: IncomingMessage, socket: Socket, head: Buffer) => {
     const baseURL = `http://${request.headers.host}/`;
+    console.log('WebSocket upgrade request received:', request.url);
     const pathName = request.url !== undefined ? new URL(request.url, baseURL).pathname : undefined;
-    
+
     if (pathName === languageServerRunConfig.pathName) {
         wss.handleUpgrade(request, socket, head, webSocket => {
             const socket: IWebSocket = {
@@ -98,7 +117,7 @@ httpServer.on('upgrade', (request: IncomingMessage, socket: Socket, head: Buffer
             };
             // launch the server when the web socket is opened
             if (webSocket.readyState === webSocket.OPEN) {
-                
+
                 launchLanguageServer(languageServerRunConfig, socket);
             } else {
                 webSocket.on('open', () => {

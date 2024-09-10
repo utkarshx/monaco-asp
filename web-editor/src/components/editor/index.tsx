@@ -1,7 +1,7 @@
 import MonacoEditor, { EditorDidMount } from "react-monaco-editor";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { HELLO_LANG_ID, MONACO_OPTIONS } from "./constants";
-import { createModel, registerLanguage } from "./util";
+import {  registerLanguage } from "./util";
 import { MonacoLanguageClient } from "monaco-languageclient";
 import { WebSocketMessageReader, WebSocketMessageWriter, toSocket } from 'vscode-ws-jsonrpc';
 import { CloseAction, ErrorAction, MessageTransports } from 'vscode-languageclient';
@@ -61,26 +61,26 @@ export function Editor() {
 
         if (!isLsConnectedRef.current) {
             console.log("Connecting to LS");
-            const model = createModel();
-            editor.setModel(model);
+            // const model = createModel();
+            // editor.setModel(model);
           
             try {
                 const webSocket = initWebSocketAndStartClient('ws://localhost:30000/sampleServer');
 
                 // Add content change listener
-                editor.onDidChangeModelContent((event) => {
-                    console.log("Editor content changed:", event);
-                    if (languageClientRef.current) {
-                        const content = editor.getValue();
-                        languageClientRef.current.sendNotification('textDocument/didChange', {
-                            textDocument: {
-                                uri: model.uri.toString(),
-                                version: model.getVersionId()
-                            },
-                            contentChanges: [{ text: content }]
-                        });
-                    }
-                });
+                // editor.onDidChangeModelContent((event) => {
+                //     console.log("Editor content changed:", event);
+                //     if (languageClientRef.current) {
+                //         const content = editor.getValue();
+                //         languageClientRef.current.sendNotification('textDocument/didChange', {
+                //             textDocument: {
+                //                 uri: model.uri.toString(),
+                //                 version: model.getVersionId()
+                //             },
+                //             contentChanges: [{ text: content }]
+                //         });
+                //     }
+                // });
 
                 // Add diagnostics change listener
                 languageClientRef.current?.onDidChangeState((state) => {
