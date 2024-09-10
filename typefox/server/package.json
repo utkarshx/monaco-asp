@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.20.0",
+    "pyright": "^1.1.379",
     "vscode-languageserver": "^9.0.1",
     "vscode-ws-jsonrpc": "^3.3.2",
     "ws": "^8.18.0"
