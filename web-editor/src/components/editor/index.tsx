@@ -1,9 +1,10 @@
 import MonacoEditor, { EditorDidMount } from "react-monaco-editor";
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { connectToLs } from "../ls-client/ws-client";
 import { HELLO_LANG_ID, MONACO_OPTIONS } from "./constants";
 import { createModel, registerLanguage } from "./util";
 import { MonacoLanguageClient } from "monaco-languageclient";
+import { WebSocketMessageReader, WebSocketMessageWriter, toSocket } from 'vscode-ws-jsonrpc';
+import { CloseAction, ErrorAction, MessageTransports } from 'vscode-languageclient';
 
 export function Editor() {
     const [isEditorReady, setIsEditorReady] = useState(false);
@@ -20,6 +21,38 @@ export function Editor() {
         initEditor();
     }, []);
 
+    const createLanguageClient = (transports: MessageTransports): MonacoLanguageClient => {
+        return new MonacoLanguageClient({
+            name: 'Sample Language Client',
+            clientOptions: {
+                documentSelector: ["json"],
+                errorHandler: {
+                    error: () => ({ action: ErrorAction.Continue }),
+                    closed: () => ({ action: CloseAction.DoNotRestart })
+                }
+            },
+            connectionProvider: {
+                get: () => Promise.resolve(transports)
+            }
+        });
+    };
+
+    const initWebSocketAndStartClient = (url: string): WebSocket => {
+        const webSocket = new WebSocket(url);
+        webSocket.onopen = () => {
+            const socket = toSocket(webSocket);
+            const reader = new WebSocketMessageReader(socket);
+            const writer = new WebSocketMessageWriter(socket);
+            const languageClient = createLanguageClient({ reader, writer });
+            languageClientRef.current = languageClient;
+            languageClient.start();
+            reader.onClose(() => languageClient.stop());
+            isLsConnectedRef.current = true;
+            console.log("Connected to LS");
+        };
+        return webSocket;
+    };
+
     const editorDidMount = useCallback<EditorDidMount>(async (editor, monaco) => {
         mountCountRef.current += 1;
         console.log(`editorDidMount called (count: ${mountCountRef.current})`);
@@ -32,19 +65,25 @@ export function Editor() {
             editor.setModel(model);
           
             try {
-                const languageClient = await connectToLs();
-                languageClientRef.current = languageClient;
-                isLsConnectedRef.current = true;
-                console.log("Connected to LS");
+                const webSocket = initWebSocketAndStartClient('ws://localhost:30000/sampleServer');
 
                 // Add content change listener
                 editor.onDidChangeModelContent((event) => {
                     console.log("Editor content changed:", event);
-                    // You can add more specific logging or handling here
+                    if (languageClientRef.current) {
+                        const content = editor.getValue();
+                        languageClientRef.current.sendNotification('textDocument/didChange', {
+                            textDocument: {
+                                uri: model.uri.toString(),
+                                version: model.getVersionId()
+                            },
+                            contentChanges: [{ text: content }]
+                        });
+                    }
                 });
 
                 // Add diagnostics change listener
-                languageClient.onDidChangeState((state) => {
+                languageClientRef.current?.onDidChangeState((state) => {
                     console.log("Language client state changed:", state);
                 });
 

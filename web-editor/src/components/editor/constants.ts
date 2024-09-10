@@ -1,7 +1,7 @@
 import * as monaco from 'monaco-editor';
 
-export const HELLO_LANG_ID = "Lua";
-export const HELLO_LANG_EXTENSION = ".lua";
+export const HELLO_LANG_ID = "json";
+export const HELLO_LANG_EXTENSION = ".json";
 export const MONACO_OPTIONS: monaco.editor.IEditorConstructionOptions = {
     autoIndent: "full",
     automaticLayout: true,
