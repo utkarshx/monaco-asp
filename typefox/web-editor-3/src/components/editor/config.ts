@@ -29,9 +29,11 @@ export const createUserConfig = (workspaceRoot: string, code: string, codeUri: s
                     onCall: (languageClient?: MonacoLanguageClient) => {
                         setTimeout(() => {
                             ['pyright.restartserver', 'pyright.organizeimports'].forEach((cmdName) => {
-                                vscode.commands.registerCommand(cmdName, (...args: unknown[]) => {
-                                    languageClient?.sendRequest('workspace/executeCommand', { command: cmdName, arguments: args });
-                                });
+                                if (!vscode.commands.getCommands()) {
+                                    vscode.commands.registerCommand(cmdName, (...args: unknown[]) => {
+                                        languageClient?.sendRequest('workspace/executeCommand', { command: cmdName, arguments: args });
+                                    });
+                                }
                             });
                         }, 250);
                     },
