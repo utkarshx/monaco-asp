@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "license": "MIT",
     "scripts": {
-       "build": "webpack    --mode production",
+        "build": "webpack    --mode production",
         "dev": "webpack serve --mode development"
     },
     "devDependencies": {
@@ -19,10 +19,12 @@
         "webpack-dev-server": "^4.15.1"
     },
     "dependencies": {
+        "@codingame/monaco-vscode-json-default-extension": "^8.0.4",
         "@codingame/monaco-vscode-textmate-service-override": "^8.0.4",
         "@codingame/monaco-vscode-theme-service-override": "^8.0.4",
         "monaco-editor": "^0.50.0",
         "monaco-editor-webpack-plugin": "^7.1.0",
+        "monaco-editor-wrapper": "^5.5.3",
         "monaco-languageclient": "8.8.3",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
