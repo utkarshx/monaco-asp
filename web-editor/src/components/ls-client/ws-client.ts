@@ -15,6 +15,20 @@ export function connectToLs(): Promise<MonacoLanguageClient> {
             const writer = new WebSocketMessageWriter(socket);
             const languageClient = createLanguageClient(reader, writer);
 
+            /**************************** */
+            // Add message logging
+            socket.onMessage((message) => {
+                console.log('WebSocket message received:', message);
+            });
+
+            socket.send = new Proxy(socket.send, {
+                apply: (target, thisArg, args) => {
+                    console.log('WebSocket message sent:', args[0]);
+                    return target.apply(thisArg, args);
+                }
+            });
+            /***************************** */
+
             languageClient.onDidChangeState((event) => {
                 console.log('Monaco Language Client State Changed:', event.newState);
             });

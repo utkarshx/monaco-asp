@@ -19,10 +19,6 @@ export const launch = (socket: IWebSocket) => {
 
     if (serverConnection) {
         forward(socketConnection, serverConnection, (message) => {
-            // if (rpc.isRequestMessage(message) && isInitializeRequest(message)) {
-            //     message.params.processId = process.pid
-            // }
-            // return message
             if (Message.isRequest(message)) {
                 console.log("Request: --------------------------------")
                 console.log(message)

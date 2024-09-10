@@ -4,6 +4,7 @@ import { connectToLs } from "../ls-client/ws-client";
 import { HELLO_LANG_ID, MONACO_OPTIONS } from "./constants";
 import { createModel, registerLanguage } from "./util";
 import { MonacoLanguageClient } from "monaco-languageclient";
+import * as monacodef from "monaco-editor"
 
 export function Editor() {
     const [isEditorReady, setIsEditorReady] = useState(false);
@@ -37,10 +38,46 @@ export function Editor() {
                 isLsConnectedRef.current = true;
                 console.log("Connected to LS");
 
+                /**************************** */
+                // Add message logging
+                languageClient.onNotification('any',(method, params) => {
+                    console.log('Received notification:', method, params);
+                });
+
+                languageClient.onRequest('any',(method, params) => {
+                    console.log('Received request:', method, params);
+                    return null;
+                });
+                /************************** */
+
+                // Add content change listener
+                // editor.onDidChangeModelContent((event) => {
+                //     console.log("Editor content changed:", event);
+                //     // You can add more specific logging or handling here
+                // });
+
+                // Register the language client with Monaco
+                // monaco.languages.registerCompletionItemProvider(HELLO_LANG_ID, {
+                //     provideCompletionItems: (model, position) => {
+                //         console.log("Completion requested:", model.uri.toString(), position);
+                //         return languageClient.sendRequest('textDocument/completion', {
+                //             textDocument: { uri: model.uri.toString() },
+                //             position: position
+                //         }).then((result) => {
+                //             console.log("Completion result:", result);
+                //             return { suggestions: result as monacodef.languages.CompletionItem[] };
+                //         });
+                //     }
+                // });
+
                 // Add content change listener
                 editor.onDidChangeModelContent((event) => {
                     console.log("Editor content changed:", event);
-                    // You can add more specific logging or handling here
+                    const position = editor.getPosition();
+                    languageClient.sendNotification('textDocument/didChange', {
+                        textDocument: { uri: model.uri.toString() },
+                        contentChanges: [{ text: editor.getValue() }]
+                    });
                 });
 
                 // Add diagnostics change listener
