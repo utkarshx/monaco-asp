@@ -7,5 +7,5 @@ import { runJsonServer } from './main.js';
 import { getLocalDirectory } from '../../common/node/server-commons.js';
 
 const baseDir = resolve(getLocalDirectory(import.meta.url));
-const relativeDir = '../../../dist/json/server/json-server.js';
+const relativeDir = './json-server.js';
 runJsonServer(baseDir, relativeDir);

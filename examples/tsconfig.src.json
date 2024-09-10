@@ -37,8 +37,6 @@
     "**/test/**/*.ts",
     "**/src/**/*.tsx",
     "**/test/**/*.tsx",
-    "**/packages/*/*.ts",
-    "**/packages/*/*.js",
     "**/build/**/*.mts",
     "*.js",
     "*.ts"
