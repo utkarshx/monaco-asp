@@ -30,8 +30,12 @@ export const registerLanguage = async () => {
     }
 }
 
+const value = `{
+    "$schema": "http://json.schemastore.org/coffeelint",
+    "line_endings": "unix"
+}`;
 export const createModel = (): monaco.editor.ITextModel => monaco.editor.createModel(
-    '',
+    value,
     HELLO_LANG_ID,
     monaco.Uri.parse(
         `file:///hello-${Math.random()}${HELLO_LANG_EXTENSION}`

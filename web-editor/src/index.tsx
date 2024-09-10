@@ -4,7 +4,5 @@ import { App } from './app'
 
 const root = ReactDOM.createRoot(document.getElementById('container') as HTMLElement)
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <App />
 )
