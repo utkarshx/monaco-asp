@@ -16,6 +16,7 @@ export const launch = (socket: IWebSocket) => {
         [serverModule, 'up', '--method', 'stdio']
     )
 
+
     if (serverConnection) {
         forward(socketConnection, serverConnection, (message) => {
             // if (rpc.isRequestMessage(message) && isInitializeRequest(message)) {
