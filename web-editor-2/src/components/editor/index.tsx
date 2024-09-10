@@ -10,10 +10,9 @@ export function EditorComponent() {
 
     const handleEditorDidMount: OnMount = (editor: monaco.editor.IStandaloneCodeEditor) => {
         setIsEditorReady(true);
-        // Assuming `registerLanguage` and `createModel` can handle these types
         registerLanguage();
-        const model = createModel();
-        editor.setModel(model);
+        //  createModel();
+        //editor.setModel(model);
         connectToLs();
         editor.focus();
     };
